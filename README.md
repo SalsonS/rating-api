@@ -37,9 +37,9 @@ INSERT INTO `ratingevaluation`.`ratingvalue` (`Value`) VALUES ('Awfull');
 
 INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('1', 'Sale', '2019-05-21 07:00');
 INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('2', 'Sale', '2019-05-21 08:00');
-INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('3', 'Salev', '2019-05-21 09:00');
+INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('3', 'Sale', '2019-05-21 09:00');
 INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('4', 'Sale', '2019-05-21 1:00');
 INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('5', 'Cone', '2019-05-21 3:00');
 INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('2', 'Cone', '2019-05-21 4:00');
 INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('2', 'Cone', '2019-05-21 5:00');
-INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('4', 'Cone', '2019-05-21 600');
+INSERT INTO `ratingevaluation`.`rating` (`RatingValueId`, `User`, `Date`) VALUES ('4', 'Cone', '2019-05-21 6:00');
