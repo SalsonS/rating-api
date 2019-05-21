@@ -1,5 +1,8 @@
 Instruction
 
+You might need to install the mysqlconnector:
+https://dev.mysql.com/downloads/connector/net/6.9.html
+
 Use the following in MySql for set up the database:
 
 DROP SCHEMA IF EXISTS RatingEvaluation;
