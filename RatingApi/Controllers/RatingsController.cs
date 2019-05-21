@@ -57,7 +57,7 @@ namespace RatingApi.Controllers
             db.ratings.Add(value);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("Created: ", new { id = value.RatingId }, value);
+            return Ok(value);
         }
 
         // PUT api/ratings/5
@@ -67,7 +67,7 @@ namespace RatingApi.Controllers
             ratingToUpdate.RatingValueId = value.RatingValueId;
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("Created: ", new { id = value.RatingId }, value);
+            return Ok(value);
         }
     }
 
