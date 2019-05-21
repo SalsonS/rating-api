@@ -23,7 +23,7 @@ namespace RatingApi
         [DataMember]
         public string User { get; set; }
         [DataMember]
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual ratingvalue ratingvalue { get; set; }
     }

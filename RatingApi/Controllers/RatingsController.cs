@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace RatingApi.Controllers
 {
@@ -23,10 +24,12 @@ namespace RatingApi.Controllers
         [Route("api/stats")]
         public IQueryable<ratingvalue> getStatsForDate(DateTime date)
         {
+            var start = date.Date;
+            var end = date.Date.AddDays(1).AddTicks(-1);
 
             IQueryable<ratingvalue> x = db.ratingvalues
                 .Include(rv => rv.ratings)
-                .Where(rv => rv.ratings.Any(r => r.Date == date));
+                .Where(rv => rv.ratings.Any(r => r.Date >= start && r.Date < end));
             return x;
         }
 

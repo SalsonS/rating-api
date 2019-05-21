@@ -4,21 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RatingEvaluationModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RatingEvaluationModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="rating">
           <Key>
             <PropertyRef Name="RatingId" />
           </Key>
-          <Property Name="RatingId" Type="int" Nullable="false" />
+          <Property Name="RatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RatingValueId" Type="int" Nullable="false" />
           <Property Name="User" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Date" Type="datetime" Precision="0" />
+          <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ratingvalue">
           <Key>
-            <PropertyRef Name="RatingTypeId" />
+            <PropertyRef Name="RatingValueId" />
           </Key>
-          <Property Name="RatingTypeId" Type="int" Nullable="false" />
+          <Property Name="RatingValueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="rating_ibfk_1">
@@ -26,7 +26,7 @@
           <End Role="rating" Type="Self.rating" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ratingvalue">
-              <PropertyRef Name="RatingTypeId" />
+              <PropertyRef Name="RatingValueId" />
             </Principal>
             <Dependent Role="rating">
               <PropertyRef Name="RatingValueId" />
@@ -41,49 +41,48 @@
             <End Role="rating" EntitySet="rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RatingEvaluationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ratingevaluationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ratings" EntityType="RatingEvaluationModel.rating" />
+          <EntitySet Name="ratingvalues" EntityType="RatingEvaluationModel.ratingvalue" />
+          <AssociationSet Name="rating_ibfk_1" Association="RatingEvaluationModel.rating_ibfk_1">
+            <End Role="ratingvalue" EntitySet="ratingvalues" />
+            <End Role="rating" EntitySet="ratings" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="rating">
           <Key>
             <PropertyRef Name="RatingId" />
           </Key>
-          <Property Name="RatingId" Type="Int32" Nullable="false" />
+          <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RatingValueId" Type="Int32" Nullable="false" />
-          <Property Name="User" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Date" Type="DateTime" />
-          <NavigationProperty Name="ratingvalue" Relationship="Self.rating_ibfk_1" FromRole="rating" ToRole="ratingvalue" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="ratingvalue" Relationship="RatingEvaluationModel.rating_ibfk_1" FromRole="rating" ToRole="ratingvalue" />
         </EntityType>
         <EntityType Name="ratingvalue">
           <Key>
-            <PropertyRef Name="RatingTypeId" />
+            <PropertyRef Name="RatingValueId" />
           </Key>
-          <Property Name="RatingTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ratings" Relationship="Self.rating_ibfk_1" FromRole="ratingvalue" ToRole="rating" />
+          <Property Name="RatingValueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ratings" Relationship="RatingEvaluationModel.rating_ibfk_1" FromRole="ratingvalue" ToRole="rating" />
         </EntityType>
         <Association Name="rating_ibfk_1">
-          <End Role="ratingvalue" Type="Self.ratingvalue" Multiplicity="1" />
-          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <End Type="RatingEvaluationModel.ratingvalue" Role="ratingvalue" Multiplicity="1" />
+          <End Type="RatingEvaluationModel.rating" Role="rating" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ratingvalue">
-              <PropertyRef Name="RatingTypeId" />
+              <PropertyRef Name="RatingValueId" />
             </Principal>
             <Dependent Role="rating">
               <PropertyRef Name="RatingValueId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ratingevaluationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ratings" EntityType="Self.rating" />
-          <EntitySet Name="ratingvalues" EntityType="Self.ratingvalue" />
-          <AssociationSet Name="rating_ibfk_1" Association="Self.rating_ibfk_1">
-            <End Role="ratingvalue" EntitySet="ratingvalues" />
-            <End Role="rating" EntitySet="ratings" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -93,18 +92,18 @@
           <EntitySetMapping Name="ratings">
             <EntityTypeMapping TypeName="RatingEvaluationModel.rating">
               <MappingFragment StoreEntitySet="rating">
-                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
-                <ScalarProperty Name="RatingValueId" ColumnName="RatingValueId" />
-                <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="RatingValueId" ColumnName="RatingValueId" />
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ratingvalues">
             <EntityTypeMapping TypeName="RatingEvaluationModel.ratingvalue">
               <MappingFragment StoreEntitySet="ratingvalue">
-                <ScalarProperty Name="RatingTypeId" ColumnName="RatingTypeId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="RatingValueId" ColumnName="RatingValueId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -23,7 +23,7 @@ namespace RatingApi
         }
 
         [DataMember]
-        public int RatingTypeId { get; set; }
+        public int RatingValueId { get; set; }
         [DataMember]
         public string Value { get; set; }
         [DataMember]
