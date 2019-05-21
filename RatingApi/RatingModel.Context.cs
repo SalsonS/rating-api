@@ -16,9 +16,8 @@ namespace RatingApi
     public partial class ratingevaluationEntities : DbContext
     {
         public ratingevaluationEntities()
-            : base("name=ratingevaluationEntities")
+            : base("name=ratingevaluationEntities1")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

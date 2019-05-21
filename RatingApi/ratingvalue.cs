@@ -11,9 +11,7 @@ namespace RatingApi
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class ratingvalue
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +19,10 @@ namespace RatingApi
         {
             this.ratings = new HashSet<rating>();
         }
-
-        [DataMember]
+    
         public int RatingValueId { get; set; }
-        [DataMember]
         public string Value { get; set; }
-        [DataMember]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rating> ratings { get; set; }
     }
