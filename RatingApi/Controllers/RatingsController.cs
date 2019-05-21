@@ -22,15 +22,21 @@ namespace RatingApi.Controllers
         }
 
         [Route("api/stats")]
-        public IQueryable<ratingvalue> getStatsForDate(DateTime date)
+        public async Task<IHttpActionResult> getStatsForDate(DateTime date)
         {
-            var start = date.Date;
-            var end = date.Date.AddDays(1).AddTicks(-1);
+            try { 
+                var start = date.Date;
+                var end = date.Date.AddDays(1).AddTicks(-1);
 
-            IQueryable<ratingvalue> x = db.ratingvalues
-                .Include(rv => rv.ratings)
-                .Where(rv => rv.ratings.Any(r => r.Date >= start && r.Date < end));
-            return x;
+                IQueryable<ratingvalue> x = db.ratingvalues
+                    .Include(rv => rv.ratings)
+                    .Where(rv => rv.ratings.Any(r => r.Date >= start && r.Date < end));
+
+                return Ok(x);
+            } catch
+            {
+                return BadRequest();
+            }
         }
 
         // GET api/ratings
