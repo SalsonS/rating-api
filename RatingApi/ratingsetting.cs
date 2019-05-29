@@ -11,20 +11,11 @@ namespace RatingApi
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
-    public partial class rating
+    
+    public partial class ratingsetting
     {
-        [DataMember]
-        public int RatingId { get; set; }
-        [DataMember]
-        public int RatingValueId { get; set; }
-        [DataMember]
-        public string User { get; set; }
-        [DataMember]
-        public System.DateTime Date { get; set; }
-
-        public virtual ratingvalue ratingvalue { get; set; }
+        public int RatingSeetingId { get; set; }
+        public string Title { get; set; }
+        public string Value { get; set; }
     }
 }

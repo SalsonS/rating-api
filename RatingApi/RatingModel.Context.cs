@@ -16,7 +16,7 @@ namespace RatingApi
     public partial class ratingevaluationEntities : DbContext
     {
         public ratingevaluationEntities()
-            : base("name=ratingevaluationEntities1")
+            : base("name=ratingevaluationEntities")
         {
         }
     
@@ -26,6 +26,7 @@ namespace RatingApi
         }
     
         public virtual DbSet<rating> ratings { get; set; }
+        public virtual DbSet<ratingsetting> ratingsettings { get; set; }
         public virtual DbSet<ratingvalue> ratingvalues { get; set; }
     }
 }

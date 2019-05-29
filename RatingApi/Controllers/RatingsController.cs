@@ -71,9 +71,4 @@ namespace RatingApi.Controllers
         }
     }
 
-    class TodaysStats
-    {
-
-    }
-
 }
