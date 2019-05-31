@@ -39,6 +39,26 @@ namespace RatingApi.Controllers
             }
         }
 
+        [Route("api/rangestats")]
+        public async Task<IHttpActionResult> getStatsForDateRance(DateTime start, DateTime end)
+        {
+            try
+            {
+                var startDate = start.Date;
+                var endDate = end.Date;
+
+                IQueryable<ratingvalue> x = db.ratingvalues
+                    .Include(rv => rv.ratings)
+                    .Where(rv => rv.ratings.Any(r => r.Date >= startDate && r.Date < endDate));
+
+                return Ok(x);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         // GET api/ratings
         public IQueryable<rating> Get()
         {
